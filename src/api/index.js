@@ -58,13 +58,18 @@ const utils = {
   /**
    * function to get login to get the token
    * @param {String} tags - types tag
+   * @param {Number} limit - types limit
+   * @param {Number} offset - types offset
    * @param {String} token - valid user token
    * @return {Promise}
    */
-  searchBookmark: (token, limit, offset, tags) => {
+  searchBookmark: (tags, limit, offset, token) => {
     return request({
       url: `http://localhost:3000/api/bookmark`,
       method: 'get',
+      headers: {
+        'x-access-token': token
+      },
       json: true,
       qs: {
         tags: tags,

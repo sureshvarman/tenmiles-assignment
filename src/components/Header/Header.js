@@ -52,7 +52,10 @@ class Header extends React.Component {
           <Nav pullRight>
             {
               this.props.isLoggedIn ?
-              <NavItem eventKey={1} onClick={this.onLogout}>Logout</NavItem>
+              <Nav pullRight>
+                <NavItem eventKey={1} onClick={this.onLogout}>Logout</NavItem>
+                <NavItem eventKey={1}><Link to='/search'>Search Bookmarks</Link></NavItem>
+              </Nav>
               :
               <NavItem className="cs-link" eventKey={1}><Link to='/signup'>SignUp</Link></NavItem>
             }

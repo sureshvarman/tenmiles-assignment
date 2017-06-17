@@ -26,7 +26,10 @@ module.exports = function(models) {
       .then((result) => {
          var response = {
            meta: {
-             next: result.nextOffset < result.count ? req.originalUrl.split('?')[0] + '?limit=' + result.nextLimit + '&offset=' + result.nextOffset : ''
+             next: {
+              limit: result.nextOffset < result.count ? result.nextLimit : '',
+              offset: result.nextOffset < result.count ? result.nextOffset : '',
+             }
            },
            data: result.data
          };

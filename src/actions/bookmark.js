@@ -20,13 +20,15 @@ export function add(bookmark, token) {
 /**
  * function to get login to get the token
  * @param {String} tags - types tag
+ * @param {Number} limit - types limit
+ * @param {Number} offset - types offset
  * @param {String} token - valid user token
  */
-export function search(tags, token) {
+export function search(tags, limit, offset, token) {
   return {
     types: [types.ON_BOOKMARK_SEARCH, types.ON_BOOKMARK_SEARCH_SUCCESS, types.ON_BOOKMARK_SEARCH_FAIL],
     payload: {
-      response: api.searchBookmark(tags, token)
+      response: api.searchBookmark(tags, limit, offset, token)
     }
   }
 }

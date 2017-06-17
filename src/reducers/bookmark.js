@@ -10,7 +10,13 @@ const initialState = {
   url: '',
   tags: '',
   err: '',
-  success: ''
+  success: '',
+  search: {
+    data: [],
+    nextLimit: 1,
+    nextOffset: 0,
+    err: ''
+  }
 };
 
 export default createReducer(initialState, {
@@ -46,6 +52,25 @@ export default createReducer(initialState, {
       ...state,
       err: 'Oops! something went wrong',
       success: ''
+    }
+  },
+  [types.ON_BOOKMARK_SEARCH_SUCCESS] (state, action) {
+    let {response} = action.payload;
+    let search = state.search;
+
+    search.nextLimit = response.meta.next.limit;
+    search.nextOffset = response.meta.next.offset;
+    search.data = response.data;
+    search.err = ''
+    return {
+      ...state,
+      search: search
+    }
+  },
+  [types.ON_BOOKMARK_SEARCH_FAIL] (state, action) {
+    return {
+      ...state,
+      err: 'Search failed'
     }
   }
 });

@@ -1,33 +1,27 @@
-# Open weather APP
+### TenMiles Assignment
 
-## Dependencies
+### Done
+* Server side APIs
+* Login using token (JWT)
+* Authentication Middleware
+* Signup using simple form
+* creation of bookmarks
+* Search of bookmarks with tag partial search
+* Quality of code with proper docs
 
-### Starter kit
-https://github.com/davezuko/react-redux-starter-kit
+#### If got more time, would have done below items
+* search pagination (previous, next is there anyway)
+* Better UI
+* Test scripts for both backend and front-end
+* Proper error messages
 
-### Weather API
-https://openweathermap.org/
-
-### redux-async-transitions
-https://www.npmjs.com/package/redux-async-transitions
-
-## Development
-
-### Run
+#### How to run
+***Used yarn over npm***
+so
 ```
-npm run dev
-```
-
-### ENV
-
-```
-OWAPI_KEY - key for openweather api
-OWAPI_NAME - name for openweather api
+yarn install
 ```
 
-## Total time spent on this assignment - 3 hours solid
-
-## Features - which can be covered, if got more time
-* tests
-* more information on the weather, which is already there in API response
-* cache in server side to avoid duplicate calls to the openweather api (any way the openweather api updated on every 2 hours, so cache invalidation can be applied for 2 hours).
+```
+yarn start
+```
