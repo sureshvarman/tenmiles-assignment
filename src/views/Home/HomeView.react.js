@@ -18,13 +18,13 @@ class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.token()) {
+      this.actions.redirectToBookmark();
+    }
     this.props = nextProps;
   }
 
   renderMainView = () => {
-    if (this.props.auth.token()) {
-      return (<div>Loggedin</div>)
-    }
     return (
       <Login
        username={this.props.auth.username}

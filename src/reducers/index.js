@@ -4,8 +4,12 @@
  */
 import { combineReducers } from 'redux';
 import auth from './auth';
+import user from './user';
+import bookmark from './bookmark';
 
 // combines reducers into a single reducer object
 export default combineReducers({
-  auth
+  auth,
+  user,
+  bookmark
 });

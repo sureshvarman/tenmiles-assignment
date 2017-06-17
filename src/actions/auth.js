@@ -3,8 +3,8 @@ import api from '../api';
 
 /**
  * function to get login to get the token
- * @param {Object.username} form.username - typeahead typed data
- * @param {Object.username} form.password - typeahead typed data
+ * @param {Object.username} form.username - typed username
+ * @param {Object.password} form.password - typed password
  */
 export function login(form) {
   return {
@@ -17,8 +17,8 @@ export function login(form) {
 
 /**
  * function to edit the login details
- * @param {Object.username} form.username - typeahead typed data
- * @param {Object.username} form.password - typeahead typed data
+ * @param {Object.username} form.username - typed username
+ * @param {Object.password} form.password - typed password
  */
 export function onEdit(form) {
   return {
@@ -29,12 +29,29 @@ export function onEdit(form) {
   }
 }
 
+/**
+ * function to redirect to the bookmark page, if signed in
+ */
 export function redirectToBookmark() {
   return {
-    type: types.DUMMY,
+    type: types.REDIRECT,
     meta: {
       transition: () => ({
         path : '/bookmark'
+      })
+    }
+  }
+}
+
+/**
+ * function to logout
+ */
+export function logout() {
+  return {
+    type: types.LOGOUT,
+    meta: {
+      transition: () => ({
+        path : '/'
       })
     }
   }

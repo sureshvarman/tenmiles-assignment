@@ -21,6 +21,20 @@ const utils = {
     });
   },
   /**
+   * function to handle the call to get the city lists
+   * @param {Object.username} form.username
+   * @param {Object.password} form.password
+   * @return {Promise}
+   */
+  signup: (form) => {
+    return request({
+      url: `http://localhost:3000/api/user`,
+      method: 'post',
+      json: true,
+      body: form
+    });
+  },
+  /**
    * function to get login to get the token
    * @param {BookMark.name} bookmark.name - name
    * @param {BookMark.url} bookmark.url - url

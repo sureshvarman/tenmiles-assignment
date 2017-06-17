@@ -7,6 +7,7 @@ const webpackConfig = require('../config/webpack.config');
 const debug = require('debug')('app:server');
 const project = require('../config/project.config');
 const path = require('path');
+const express = require('express');
 
 const webpackServer = function(app) {
 

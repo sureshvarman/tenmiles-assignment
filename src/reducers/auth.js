@@ -1,5 +1,5 @@
 /**
- * reducers for the map to cache the city data and city list
+ * reducers for the auth data
  */
 import * as types from '../constants';
 import { createReducer } from 'redux-create-reducer';
@@ -33,6 +33,8 @@ export default createReducer(initialState, {
     window.localStorage.setItem('myToken', response);
     return {
       ...state,
+      username: '',
+      password: '',
       err: ''
     };
   },
@@ -42,4 +44,10 @@ export default createReducer(initialState, {
       err: 'Login failed'
     };
   },
+  [types.LOGOUT] (state, action) {
+    localStorage.removeItem('myToken')
+    return {
+      ...state
+    }
+  }
 });

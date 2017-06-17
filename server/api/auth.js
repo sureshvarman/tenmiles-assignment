@@ -25,9 +25,7 @@
        return new Promise((resolve, reject) => {
          models.User.findOne({ _id: data.username })
           .then((User) => {
-            console.log('===>USR', User);
             User.comparePassword(data.password, function(err, result) {
-              console.log('===>RESULT', result);
               if (err) return reject(err);
 
               var token = jwt.sign({userId: data.username}, superSecret, {

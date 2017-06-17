@@ -3,20 +3,27 @@
  * @prop {ReactElement} children
  */
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as authActions from '../../actions/auth.js';
+import Header from '../../components/Header';
 import './CoreLayout.scss';
 
-export default class CoreLayout extends React.Component {
+class CoreLayout extends React.Component {
   static propTypes = {
     children : React.PropTypes.element
   }
 
   constructor (props) {
     super(props);
+    const { dispatch } = this.props;
+    this.actions = bindActionCreators(authActions, dispatch);
   }
 
   render () {
     return (
       <div className='app-container'>
+        <Header isLoggedIn={this.props.auth.token() ? true : false} onLogout={this.actions.logout}/>
         <div className='view-port'>
           {this.props.children}
         </div>
@@ -24,3 +31,24 @@ export default class CoreLayout extends React.Component {
     );
   }
 }
+
+
+/**
+ * function to map state information to component
+ * will be a callback
+ * @param {state} Object
+ * @return {Object}
+ */
+function mapStateToProps(state) {
+    const { auth } = state;
+    return {
+      auth
+    };
+}
+
+CoreLayout.propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    auth: React.PropTypes.object
+};
+
+export default connect(mapStateToProps)(CoreLayout);
