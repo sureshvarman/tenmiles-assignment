@@ -1,51 +1,32 @@
-import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
-import thunk from 'redux-thunk'
-import { browserHistory } from 'react-router'
-import makeRootReducer from './reducers'
-import { updateLocation } from './location'
+/**
+ * creates store with async middleware and devtools
+ * @param {initialState} Object - state information
+ * @param {history} Object - history details
+ * @return {Object}
+ */
 
-const createStore = (initialState = {}) => {
-  // ======================================================
-  // Middleware Configuration
-  // ======================================================
-  const middleware = [thunk]
+import { compose, createStore, applyMiddleware } from 'redux';
+import { devTools } from 'redux-devtools';
+import rootReducer from 'reducers';
+import reduxasynctransitions from 'redux-async-transitions';
 
-  // ======================================================
-  // Store Enhancers
-  // ======================================================
-  const enhancers = []
-  let composeEnhancers = compose
+let createStoreWithMiddleware;
 
-  if (__DEV__) {
-    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    }
+
+export default function configureStore (initialState, history) {
+  if (DEBUG) {
+    createStoreWithMiddleware = compose(reduxasynctransitions(history),
+                                devTools())(createStore);
+  } else {
+    createStoreWithMiddleware = compose(reduxasynctransitions(history))(createStore);
   }
-
-  // ======================================================
-  // Store Instantiation and HMR Setup
-  // ======================================================
-  const store = createReduxStore(
-    makeRootReducer(),
-    initialState,
-    composeEnhancers(
-      applyMiddleware(...middleware),
-      ...enhancers
-    )
-  )
-  store.asyncReducers = {}
-
-  // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
-
+  const store = createStoreWithMiddleware(rootReducer, initialState);
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const reducers = require('./reducers').default
-      store.replaceReducer(reducers(store.asyncReducers))
-    })
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers/index');
+
+      store.replaceReducer(nextRootReducer);
+    });
   }
-
-  return store
+  return store;
 }
-
-export default createStore

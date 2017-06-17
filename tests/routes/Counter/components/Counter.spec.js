@@ -18,71 +18,63 @@ describe('(Component) Counter', () => {
     _wrapper = shallow(<Counter {..._props} />)
   })
 
-  it('renders as a <div>.', () => {
+  it('Should render as a <div>.', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('renders with an <h2> that includes Counter label.', () => {
+  it('Should render with an <h2> that includes Sample Counter text.', () => {
     expect(_wrapper.find('h2').text()).to.match(/Counter:/)
   })
 
-  it('renders {props.counter} at the end of the sample counter <h2>.', () => {
+  it('Should render props.counter at the end of the sample counter <h2>.', () => {
     expect(_wrapper.find('h2').text()).to.match(/5$/)
     _wrapper.setProps({ counter: 8 })
     expect(_wrapper.find('h2').text()).to.match(/8$/)
   })
 
-  it('renders exactly two buttons.', () => {
+  it('Should render exactly two buttons.', () => {
     expect(_wrapper.find('button')).to.have.length(2)
   })
 
-  describe('Increment', () => {
+  describe('An increment button...', () => {
     let _button
 
     beforeEach(() => {
       _button = _wrapper.find('button').filterWhere(a => a.text() === 'Increment')
     })
 
-    it('exists', () => {
-      expect(_button).to.exist()
+    it('has bootstrap classes', () => {
+      expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
-    it('is a primary button', () => {
-      expect(_button.hasClass('btn btn-primary')).to.be.true()
-    })
-
-    it('Calls props.increment when clicked', () => {
-      _spies.dispatch.should.have.not.been.called()
+    it('Should dispatch a `increment` action when clicked', () => {
+      _spies.dispatch.should.have.not.been.called
 
       _button.simulate('click')
 
-      _spies.dispatch.should.have.been.called()
-      _spies.increment.should.have.been.called()
+      _spies.dispatch.should.have.been.called
+      _spies.increment.should.have.been.called
     })
   })
 
-  describe('Double Async Button', () => {
+  describe('A Double (Async) button...', () => {
     let _button
 
     beforeEach(() => {
       _button = _wrapper.find('button').filterWhere(a => a.text() === 'Double (Async)')
     })
 
-    it('exists', () => {
-      expect(_button).to.exist()
+    it('has bootstrap classes', () => {
+      expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
-    it('is a secondary button', () => {
-      expect(_button.hasClass('btn btn-secondary')).to.be.true()
-    })
-
-    it('Calls props.doubleAsync when clicked', () => {
-      _spies.dispatch.should.have.not.been.called()
+    it('Should dispatch a `doubleAsync` action when clicked', () => {
+      _spies.dispatch.should.have.not.been.called
 
       _button.simulate('click')
 
-      _spies.dispatch.should.have.been.called()
-      _spies.doubleAsync.should.have.been.called()
+      _spies.dispatch.should.have.been.called
+      _spies.doubleAsync.should.have.been.called
     })
   })
 })

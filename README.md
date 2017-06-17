@@ -1,19 +1,33 @@
-## Ten Miles - Suresh Varman - Bookmark
+# Open weather APP
 
-### 12:00PM
-* 12 - 1 = starter kit (React, mongodb, nodejs, Bootstrap).
+## Dependencies
 
-* 1 - 2 = model, API
+### Starter kit
+https://github.com/davezuko/react-redux-starter-kit
 
-* 3 - 4 = React components, UI fixes,
+### Weather API
+https://openweathermap.org/
 
-* 4 - 5 test cases
+### redux-async-transitions
+https://www.npmjs.com/package/redux-async-transitions
 
+## Development
 
------
-Database - bookmarkApp
+### Run
+```
+npm run dev
+```
 
-Bookmark - id(AI), url(unique), createdAt, updatedAt, domain, scheme, createdBy, updatedBy.
-Tag - id(AI), bookMarkId, tagname, dateTime, createdBy, updatedBy.
-Notes - id(AI), bookMarkId, note(TEXT), createdAt, updatedAt, createdBy, updatedBy. - (additional)
-user - username, password, createdBy, updatedBy
+### ENV
+
+```
+OWAPI_KEY - key for openweather api
+OWAPI_NAME - name for openweather api
+```
+
+## Total time spent on this assignment - 3 hours solid
+
+## Features - which can be covered, if got more time
+* tests
+* more information on the weather, which is already there in API response
+* cache in server side to avoid duplicate calls to the openweather api (any way the openweather api updated on every 2 hours, so cache invalidation can be applied for 2 hours).
