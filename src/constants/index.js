@@ -12,3 +12,9 @@ export const ON_SIGNUP_FORM_TYPE = 'ON_SIGNUP_FORM_TYPE';
 export const LOGOUT = 'LOGOUT';
 
 export const REDIRECT = 'REDIRECT';
+
+export const ON_BOOKMARK = 'ON_BOOKMARK';
+export const ON_BOOKMARK_SUCCESS = 'ON_BOOKMARK_SUCCESS';
+export const ON_BOOKMARK_FAIL = 'ON_BOOKMARK_FAIL';
+
+export const ON_BOOKMARK_EDIT = 'ON_BOOKMARK_EDIT';

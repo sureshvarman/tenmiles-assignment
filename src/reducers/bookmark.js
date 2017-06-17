@@ -9,13 +9,43 @@ const initialState = {
   name: '',
   url: '',
   tags: '',
-  err: ''
+  err: '',
+  success: ''
 };
 
 export default createReducer(initialState, {
   [types.ON_BOOKMARK_EDIT] (state, action) {
+    let {name, url, tags} = action.payload;
     return {
-      ...state
+      ...state,
+      name,
+      url,
+      tags,
+      success: ''
     };
+  },
+  [types.ON_BOOKMARK] (state, action) {
+    return {
+      ...state,
+      success: ''
+    }
+  },
+  [types.ON_BOOKMARK_SUCCESS] (state, action) {
+    let {response} = action.payload;
+    return {
+      ...state,
+      name: '',
+      url: '',
+      tags: '',
+      success: 'Record, created successfully'
+    }
+  },
+  [types.ON_BOOKMARK_FAIL] (state, action) {
+
+    return {
+      ...state,
+      err: 'Oops! something went wrong',
+      success: ''
+    }
   }
 });

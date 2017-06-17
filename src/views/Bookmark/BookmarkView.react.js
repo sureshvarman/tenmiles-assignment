@@ -25,8 +25,12 @@ class BookMarkView extends React.Component {
     this.actions.onEdit(value);
   }
 
-  onSubmit = (value) => {
-    this.actions.onSubmit(value);
+  onSubmit = () => {
+    this.actions.add({
+      name: this.props.bookmark.name,
+      url: this.props.bookmark.url,
+      tags: this.props.bookmark.tags,
+    }, this.props.auth.token());
   }
 
   render() {
@@ -35,6 +39,8 @@ class BookMarkView extends React.Component {
         name={this.props.bookmark.name}
         url={this.props.bookmark.url}
         tags={this.props.bookmark.tags}
+        err={this.props.bookmark.err}
+        success={this.props.bookmark.success}
         onEdit={this.onEdit}
         onSubmit={this.onSubmit}
       />
@@ -49,9 +55,10 @@ class BookMarkView extends React.Component {
  * @return {Object}
  */
 function mapStateToProps(state) {
-    const { bookmark } = state;
+    const { bookmark, auth } = state;
     return {
-      bookmark
+      bookmark,
+      auth
     };
 }
 

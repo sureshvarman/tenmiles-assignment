@@ -4,6 +4,7 @@
  * @prop {String} text
  */
 import React from 'react';
+import {FormGroup, FormControl, Row, Col, Grid, ControlLabel} from 'react-bootstrap';
 import './Bookmark.scss';
 
 class BookMark extends React.Component {
@@ -34,15 +35,36 @@ class BookMark extends React.Component {
 
   render () {
     return (
-      <div>
-        <input type="text" value={this.props.name} onChange={this.onEdit.bind(this, 'name')} />
-        <input type="text" value={this.props.url} onChange={this.onEdit.bind(this, 'url')} />
-        <input type="text" value={this.props.tags} onChange={this.onEdit.bind(this, 'tags')} />
-        <input type="submit" onSubmit={this.onSubmit} />
-        <div className={this.props.err ? "err" : ""}>
-          {this.props.err}
-        </div>
-      </div>
+      <Grid>
+        <Row className="show-grid">
+          <Col sm={6} md={6}>
+            <Row className="clearfix">
+              <form>
+                <FormGroup>
+                  <ControlLabel>Name</ControlLabel>
+                  <FormControl type="text" value={this.props.name} onChange={this.onEdit.bind(this, 'name')} />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>URL</ControlLabel>
+                  <FormControl type="text" value={this.props.url} onChange={this.onEdit.bind(this, 'url')} />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Tags (comma separated)</ControlLabel>
+                  <FormControl type="text" value={this.props.tags} onChange={this.onEdit.bind(this, 'tags')} />
+                </FormGroup>
+
+                <FormControl type="submit" onClick={this.onSubmit} />
+                <div className={this.props.err ? "err" : ""}>
+                {this.props.err}
+                </div>
+                <div className={this.props.success ? "success" : ""}>
+                {this.props.success}
+                </div>
+              </form>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }

@@ -12,7 +12,7 @@ export function add(bookmark, token) {
   return {
     types: [types.ON_BOOKMARK, types.ON_BOOKMARK_SUCCESS, types.ON_BOOKMARK_FAIL],
     payload: {
-      response: api.addBookmark(form, token)
+      response: api.addBookmark(bookmark, token)
     }
   }
 }
@@ -27,6 +27,19 @@ export function search(tags, token) {
     types: [types.ON_BOOKMARK_SEARCH, types.ON_BOOKMARK_SEARCH_SUCCESS, types.ON_BOOKMARK_SEARCH_FAIL],
     payload: {
       response: api.searchBookmark(tags, token)
+    }
+  }
+}
+
+/**
+ * function to get login to get the token
+ * @param {BookMark} form - types tag
+ */
+export function onEdit(form) {
+  return {
+    type: types.ON_BOOKMARK_EDIT,
+    payload: {
+      ...form
     }
   }
 }

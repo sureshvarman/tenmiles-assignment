@@ -43,9 +43,13 @@ const utils = {
    * @return {Promise}
    */
   addBookmark: (bookmark, token) => {
+    console.log('===>', bookmark)
     return request({
       url: `http://localhost:3000/api/bookmark`,
       method: 'post',
+      headers: {
+        'x-access-token': token
+      },
       json: true,
       body: bookmark
     });
